@@ -19,6 +19,7 @@ source=("http://www.kernel.org/pub/linux/kernel/v6.x/${_srcname}.tar.xz"
         "http://www.kernel.org/pub/linux/kernel/v6.x/patch-${pkgver}.xz"
         '0001-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch'
         '0002-arm64-dts-rockchip-disable-pwm0-on-rk3399-firefly.patch'
+	'0003-arm64-dts-sun50i-h6-orangepi-lite2-spi0-usb3phy-dwc3-enable.patch'
         'pinctrl-rockchip-correct-RK3328-iomux-width-flag-for-GPIO2-B-pins.patch'
         'config'
         'generate_chromebook_its.sh'
@@ -29,7 +30,8 @@ md5sums=('b9828ed78dae306e3d90643cd5cdb8f1'
          'f2d395bdb12bb02ffd3289b65db0e01a'
          '7b08a199a97e3e2288e5c03d8e8ded2d'
          'c9d4e392555b77034e24e9f87c5ff0b3'
-         'd4add3377b26d8b6f0818f7dddfb8cda'
+	 '45082b9d92ea630906d519990d40a567'
+         'd4add3377b26d8b6f0818f7dddfb8cda' 
          '883a49c32379171f7968c59ea8f20a3a'
          '7c97cf141750ad810235b1ad06eb9f75'
          '61c5ff73c136ed07a7aadbf58db3d96a'
@@ -49,6 +51,9 @@ prepare() {
   # ALARM patches
   git apply ../0001-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch
   git apply ../0002-arm64-dts-rockchip-disable-pwm0-on-rk3399-firefly.patch
+  
+  # from armbian (https://github.com/armbian/build/tree/main/patch/kernel/archive/sunxi-6.7/patches.armbian)
+  git apply ../0003-arm64-dts-sun50i-h6-orangepi-lite2-spi0-usb3phy-dwc3-enable.patch
 
   # https://archlinuxarm.org/forum/viewtopic.php?f=65&t=16981
   patch -p1 -i ../pinctrl-rockchip-correct-RK3328-iomux-width-flag-for-GPIO2-B-pins.patch
