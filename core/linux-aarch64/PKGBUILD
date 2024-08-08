@@ -25,7 +25,8 @@ source=("http://www.kernel.org/pub/linux/kernel/v6.x/${_srcname}.tar.xz"
         'generate_chromebook_its.sh'
         'kernel.keyblock'
         'kernel_data_key.vbprivk'
-        'linux.preset')
+        'linux.preset'
+	'0004-allwinner-dwc3-compatible.patch')
 md5sums=('b9828ed78dae306e3d90643cd5cdb8f1'
          'f2d395bdb12bb02ffd3289b65db0e01a'
          '7b08a199a97e3e2288e5c03d8e8ded2d'
@@ -36,7 +37,8 @@ md5sums=('b9828ed78dae306e3d90643cd5cdb8f1'
          '7c97cf141750ad810235b1ad06eb9f75'
          '61c5ff73c136ed07a7aadbf58db3d96a'
          '584777ae88bce2c5659960151b64c7d8'
-         '41cb5fef62715ead2dd109dbea8413d6')
+         '41cb5fef62715ead2dd109dbea8413d6'
+ 	 'fe4a56a42c9767a0423e155ddfb5e459')
 
 prepare() {
   cd $_srcname
@@ -54,6 +56,7 @@ prepare() {
   
   # from armbian (https://github.com/armbian/build/tree/main/patch/kernel/archive/sunxi-6.7/patches.armbian)
   git apply ../0003-arm64-dts-sun50i-h6-orangepi-lite2-spi0-usb3phy-dwc3-enable.patch
+  git apply ../0004-allwinner-dwc3-compatible.patch
 
   # https://archlinuxarm.org/forum/viewtopic.php?f=65&t=16981
   patch -p1 -i ../pinctrl-rockchip-correct-RK3328-iomux-width-flag-for-GPIO2-B-pins.patch
